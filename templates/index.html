@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}WElcome to the app{% endblock %}
+
+{% block content %}
+   <h1>Select what to do:</h1>
+    <ul>
+         <li><a href="{{ url_for('create_engines') }}">Create a game Room</a></li>
+         <li><a href="{{ url_for('view_engine') }}">Enter an existing game Room</a></li>
+    </ul>
+{% endblock %}
