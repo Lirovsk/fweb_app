@@ -21,7 +21,7 @@ class EngineStorage(Base):
     id : Mapped[int] = mapped_column(Integer, primary_key=True)
     room_name : Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     engine : Mapped[str] = mapped_column(String(50), nullable=False)
-    pin : Mapped[str] = mapped_column(String(5), nullable=False, unique=True)
+    pin : Mapped[str] = mapped_column(String(5), nullable=False)
     last_update : Mapped[Optional[DateTime]] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
     
     def __str__(self):

@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Create your game Room{% endblock %}
 
+{% block header %}time to create your own game Room{% endblock %}
+
 {% block content %}
     <h1>Create your game Room</h1>
-    <form action='/engines' method="post">
-        <label for="game_name">Name of the game:</label>
+    <form action='/create_engines/' method="post">
+        <label for="game_name">Put here the name of the game:</label>
         <input type="text" id="game_name" name="name" required>
+        <br>
+        <label for="Game_pin">Put here the PIN of the game:</label>
+        <input type="text" id="Game_pin" name="pin" maxlength="4" required>
         <br>
         <input type="submit" value="Create Game">
     </form>
