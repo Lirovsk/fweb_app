@@ -2,8 +2,8 @@
 {% block title %}Welcome to the app{% endblock %}
 
 {% block content %}
-   <h1>Select what to do:</h1>
-    <ul>
+   <h1 class="content_title">Select what to do:</h1>
+    <ul class="link_list">
          <li><a href="{{ url_for('game_home') }}">Create a game Room</a></li>
           <li><a href="{{ url_for('enter_direct_room') }}">Enter on a game Room</a></li>
     </ul>

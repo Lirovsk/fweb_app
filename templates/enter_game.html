@@ -1,14 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Enjoy your gametime{% endblock %}
+{% block title %}Game Rooms{% endblock %}
+
+{% block header %}Gaming Rooms{% endblock %}
 
 {% block content %}
-    <h1>Game Name: {{game.room_name}}</h1>
-    <ul>
+    <h1 class="general_info">Game Name: {{game.room_name}}</h1>
+    <ul class="players">
         {% for player in players %}
             <li>{{ player.user_name }}</li>
         {% endfor %}
     </ul>
-    <ul>
+    <h2 class="content_separator">Opções de ações abaixo:</h2>
+    <ul class="link_list">
         <li>
             <a href="{{ url_for('payment') }}">Pagar</a>
         </li>

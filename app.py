@@ -40,7 +40,9 @@ def create_game():
 
 @app.route('/create_engines/enterDirectRoom', methods=['GET'])
 def enter_direct_room():
-    session.clear()
+    session.pop('room_name', None)
+    session.pop('user_name', None)
+    session.pop('user_pin', None)
     return render_template('NewPlayerNogame.html', game=None)
 
 @app.route('/create_engines/room/', methods=['POST'])

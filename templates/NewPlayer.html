@@ -3,9 +3,9 @@
 {% block header %}Create your user profile{% endblock %}
 
 {% block content %}
-    <h1>Game Room: {{ game.room_name }}</h1>
-    <p>Engine: {{ game.engine }}</p>
-    <p>Last Updated: {{ game.last_update }}</p>
+    <h1 class="general_info">Game Room: {{ game.room_name }}</h1>
+    <p class="general_info">Engine: {{ game.engine }}</p>
+    <p class="general_info">Last Updated: {{ game.last_update }}</p>
 
     <form action='/create_engines/room/' method="post">
         <label for="user_name">User Name:</label>
