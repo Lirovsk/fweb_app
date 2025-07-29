@@ -1,17 +1,7 @@
-from .Models import GameRoom
+from ...app.Models import GameRoom
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-
-def create_uri(room_name)-> str:
-    """Create a new URI for game room"""
-    return f"sqlite:///Rooms/{room_name}.db"
-
-def create_game_room(room_name: str):
-    """Create a new game room"""
-    uri = create_uri(room_name)
-    engine = create_engine(uri)
-    GameRoom.__table__.create(engine)
-    return None
+from .RoomCreation import create_uri
 
 def creating_user(user_name: str, pin:str, room_name: str):
     uri = create_uri(room_name)

@@ -1,4 +1,4 @@
-from .Models import EngineStorage, GameRoom, Base
+from ...app.Models import EngineStorage, GameRoom, Base
 from .RoomCreation import create_uri
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
