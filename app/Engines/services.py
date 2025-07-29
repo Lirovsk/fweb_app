@@ -41,6 +41,5 @@ def insp_default_storage():
     
 def create_default_storage():
     """Create the default storage engine."""
-    engine = engine_for_storage()
-    EngineStorage.__table__.create(engine)
+    EngineStorage.__table__.create(engine_for_storage)
     return None
