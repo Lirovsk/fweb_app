@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1 class="content_title">Create your game Room</h1>
-    <form action='/create_engines/' method="post">
+    <form action="{{ url_for('auth.create_room') }}" method="post">
         <label for="game_name">Put here the name of the game:</label>
         <input type="text" id="game_name" name="name" required>
         <br>
