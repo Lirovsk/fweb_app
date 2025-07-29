@@ -1,8 +1,8 @@
 """This file contains functions to create engines"""
 
-from ...app.Models import EngineStorage
-from ...app.Models import GameRoom
-from ...app.Models import Base
+from app.Models import EngineStorage
+from app.Models import GameRoom
+from app.Models import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
