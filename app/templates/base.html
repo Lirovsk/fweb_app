@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Web App{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>{% block header %}Welcome to My First flask app{% endblock %}</h1>
+        <h1 class="header">{% block header %}Welcome to My First flask app{% endblock %}</h1>
     </header>
     <main>
         {% block content %}
@@ -16,7 +17,8 @@
         {% endblock %}
     </main>
     <footer>
-        <p>&copy; {{ current_year }} My Web App. All rights reserved.</p>
+        <br>
+        <p>&copy;  Web App designed by <a class="footer_link" href="https://github.com/Lirovsk">Lirovsk</a>. All rights reserved.</p>
     </footer>
 </body>
 </html>

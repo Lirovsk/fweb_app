@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Game Rooms{% endblock %}
+
+{% block header %}Gaming Rooms{% endblock %}
+
+{% block content %}
+    <h1 class="general_info">Game Name: {{game.room_name}}</h1>
+    <ul class="players">
+        {% for player in players %}
+            <li>{{ player.user_name }}</li>
+        {% endfor %}
+    </ul>
+    <h1 class="general_info">Your Balance: {{ session.get('user_balance', 0) }}</h1>
+    <h2 class="content_separator">Opções de ações abaixo:</h2>
+    <ul class="link_list">
+        <li>
+            <a href="">Pagar</a>
+        </li>
+        <li>
+            <a href="">Pedir montante de volta completa</a>
+        </li>
+        <li>
+            <a href="">Hipoteca</a>
+        </li>
+        <li>
+            <a href="">Sair do Jogo</a>
+        </li>
+    </ul>
+    
+{% endblock %}

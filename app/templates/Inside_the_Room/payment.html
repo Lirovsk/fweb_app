@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Enjoy your gametime{% endblock %}
+
+{% block content %}
+    <h1>Game Name: {{game.room_name}}</h1>
+    <ul class="players">
+        {% for player in players %}
+            <li>{{ player.user_name }}</li>
+        {% endfor %}
+    </ul>
+   <h2>Payment Information</h2>
+   <p>Please proceed to payment to enjoy your game time!</p>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Game Room{% endblock %}
+{% block header %}Create your user profile{% endblock %}
+
+{% block content %}
+    <h1 class="content_title">Create your profile</h1>
+    <h2 class="general_info">After that, you will be able to enter on the selected game room.</h2>
+
+    <form action='{{ url_for("auth.enterRoom") }}' method="post">
+        <label for="user_name">User Name:</label>
+        <input type="text" id="user_name" name="user_name" required>
+        <br>
+        <label for="pin">PIN:</label>
+        <input type="text" id="pin" name="user_pin" required>
+        <br>
+        <label for="room_name">Room Name:</label>
+        <input type="text" id="room_name" name="game_room" required>
+        <br>
+        <label for="room_pin">Room PIN:</label>
+        <input type="password" id="room_pin" name="game_pin" required>
+        <br>
+        <input type="submit" value="Enter Game Room">
+    </form>
+{% endblock %}
