@@ -12,11 +12,11 @@ def retrieving_players (room_name: str):
     try:
         with Session(engine) as session:
             players = session.query(GameRoom).all()
-            return players
+            return {'trial': True, 'players': players}
     except Exception as e:
         msg = (f"Error retrieving players: {e}")
-        return msg
-    
+        return {'trial': False, 'message': msg}
+
 def retrieving_one_player(room_name: str, user_name: str):
     """Retrieve a specific player in a game room."""
     uri = create_uri(room_name)
@@ -43,3 +43,10 @@ def create_default_storage():
     """Create the default storage engine."""
     EngineStorage.__table__.create(engine_for_storage)
     return None
+
+def check_existing(**kwargs):
+    """Check if the given parameters exists and return false if one of them is not present."""
+    for key, value in kwargs.items():
+        if not value:
+            return {"trial": False, "message": f"Missing parameter: {key}"}
+    return {"trial": True}

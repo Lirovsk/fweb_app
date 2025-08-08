@@ -1,7 +1,7 @@
 from flask import (Flask,
     render_template,
     request)
-from .Engines.services import insp_default_storage, create_default_storage
+from .Engines.GeneralServices import insp_default_storage, create_default_storage
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -35,6 +35,9 @@ def create_app(test_config=None):
     #import the auth blueprint
     from . import auth_create
     app.register_blueprint(auth_create.bp)
+    
+    from . import room
+    app.register_blueprint(room.bp)
     
     @app.route("/")
     def index():

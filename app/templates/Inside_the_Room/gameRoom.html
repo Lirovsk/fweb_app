@@ -10,10 +10,11 @@
             <li>{{ player.user_name }}</li>
         {% endfor %}
     </ul>
+    <h1 class="general_info">Your Balance: {{ session.get('user_balance', 0) }}</h1>
     <h2 class="content_separator">Opções de ações abaixo:</h2>
     <ul class="link_list">
         <li>
-            <a href="{{ url_for('payment') }}">Pagar</a>
+            <a href="">Pagar</a>
         </li>
         <li>
             <a href="">Pedir montante de volta completa</a>
