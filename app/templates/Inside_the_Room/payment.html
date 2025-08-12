@@ -2,13 +2,21 @@
 {% block title %}Enjoy your gametime{% endblock %}
 
 {% block content %}
-    <h1>Game Name: {{game.room_name}}</h1>
+    <h1>Game Name: {{game}}</h1>
     <ul class="players">
         {% for player in players %}
             <li>{{ player.user_name }}</li>
         {% endfor %}
     </ul>
    <h2>Payment Information</h2>
+   <p>Insert below the payment Information:</p>
+   <form action="{{url_for('room.payment')}}" method="post">
+        <label for="user_to">Recipient</label>
+        <input type="text" id="user_to" name="user_to" required>
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Pay</button>
+   </form>
    <p>Please proceed to payment to enjoy your game time!</p>
 
 {% endblock %}

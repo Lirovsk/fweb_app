@@ -14,16 +14,25 @@
     <h2 class="content_separator">Opções de ações abaixo:</h2>
     <ul class="link_list">
         <li>
-            <a href="">Pagar</a>
+            <form action="{{ url_for('room.payment') }}" method="get">
+                <button type="submit">Pagar</button>
+            </form>
         </li>
         <li>
-            <a href="">Pedir montante de volta completa</a>
+            <form action="{{ url_for('room.ask_for_money') }}" method="post">
+                <button type="submit">Pedir montante de volta completa</button>
+            </form>
         </li>
         <li>
-            <a href="">Hipoteca</a>
+            <form action="" method="get">
+                <button type="submit">Hipoteca</button>
+            </form>
+
         </li>
         <li>
-            <a href="">Sair do Jogo</a>
+            <form action="" method="get">
+                <button type="submit">Sair do Jogo</button>
+            </form>
         </li>
     </ul>
     
