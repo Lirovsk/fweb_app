@@ -29,9 +29,9 @@ def retrieving_one_player(room_name: str, user_name: str):
         msg = (f"Error retrieving player {user_name}: {e}")
         return msg
     
-def insp_default_storage():
-    """Inspect the default storage engine."""
-    
+def insp_default_storage() -> dict:
+    """Inspect the default storage engine. return a dict saying whether the inspection was successful or not."""
+
     try:
         insp = inspect(engine_for_storage)
         return {"trial": True, "tables": insp.get_table_names()}

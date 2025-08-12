@@ -1,10 +1,12 @@
 from app.Models import GameRoom
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import Session
+from ..paths import ROOM_PATH
+
 
 def create_uri(room_name)-> str:
     """Create a new URI for game room"""
-    return f"sqlite:///Rooms/{room_name}.db"
+    return f"sqlite:///{ROOM_PATH}\{room_name}.db"
 
 def create_game_room(room_name: str):
     """Create a new game room. TThis is the only function needed to do it."""
