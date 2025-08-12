@@ -102,7 +102,7 @@ def enterRoom():
         # Storing the data in the session
         session['game_name'] = game_name
         session['game_pin'] = game_pin
-
+        # change the way the data is checked from line 107 to 123
         # Checking if the game room exists and if the pin is correct
         engine_check = retrieve_engine_data(game_name)
         if engine_check['trial'] == False:
@@ -110,7 +110,7 @@ def enterRoom():
             return redirect(url_for('auth.create_room'))
         
         room_result = check_existing_room(game_name)
-        if room_result != True:
+        if type(room_result) != bool:
             if room_result['trial'] == False:
                 flash(room_result['message'])
                 return redirect(url_for('auth.create_room'))
