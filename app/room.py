@@ -8,6 +8,7 @@ from flask import (Blueprint,
     url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 from .Engines.GeneralServices import retrieving_players
+from .bankServices import payment as payment_service
 
 bp = Blueprint('room', __name__, url_prefix='/room')
 
@@ -41,5 +42,25 @@ def gameRoom():
 def payment():
     if request.method == 'POST':
         # Handle payment logic here
-        pass
-    return render_template('Inside_the_room/payment.html')
+        user_to = request.form['user_to']
+        amount = request.form['amount']
+        try:
+            result = payment_service.user_to_user(session['user_name'], user_to, amount, session['game_name'])
+            flash('Payment successful!')
+            session['user_balance'] = result
+            return redirect(url_for('room.gameRoom'))
+        except ValueError as e:
+            flash(str(e))
+    else:
+        the_players = retrieving_players(session['game_name'])
+    return render_template('Inside_the_room/payment.html', players=the_players["players"], game=session['game_name'])
+
+
+@bp.route('ask-money', methods=['POST'])
+@room_required
+def ask_for_money():
+    user = session['user_name']
+    game_name = session['game_name']
+    session['user_balance'] = payment_service.give_money(user, game_name)
+
+    return redirect(url_for('room.gameRoom'))
