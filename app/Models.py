@@ -19,10 +19,12 @@ class EngineStorage(Base):
     __tablename__ = 'engine_storage'
 
     id : Mapped[int] = mapped_column(Integer, primary_key=True)
-    room_name : Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
+    room_name : Mapped[str] = mapped_column(String(50), nullable=False, unique=True) #change the occourances of this name to game_name
     engine : Mapped[str] = mapped_column(String(50), nullable=False)
-    pin : Mapped[str] = mapped_column(String(5), nullable=False)
+    pin : Mapped[str] = mapped_column(String(5), nullable=False)  #change the occourances of this name to game_pin
     last_update : Mapped[Optional[DateTime]] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
+    value_for_round : Mapped[int]
+    bank_needed : Mapped[bool]
     
     def __str__(self):
         return f"EngineStorage (id={self.id}, room_name={self.room_name}, engine={self.engine}, last_update={self.last_update})"
