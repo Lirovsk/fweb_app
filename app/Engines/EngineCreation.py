@@ -30,15 +30,19 @@ def delete_engine() -> None:
                 session.delete(engine) 
         session.commit()
         
-def retrieve_engine_data(room_name: str) -> EngineStorage:
-    """Retrieve an engine storage entry by room name."""
+def retrieve_engine_data(room_name: str) -> list:
+    """
+    Retrieve an engine storage entry by room name.
+    Return -> list;
+    format: (bool, engine | msg)
+    """
     try:
         with Session(engine_for_storage) as session:
             engine = session.query(EngineStorage).filter_by(room_name=room_name).first()
-            return { 'trial': True, 'engine': engine }
+            return (True, engine)
     except Exception as e:
         msg = (f"Error retrieving engine: {e}")
-        return { 'trial': False, 'message': msg }
+        return (False, msg)
 
 def delete_room(room_name: str) -> None:
     """Delete a game room."""

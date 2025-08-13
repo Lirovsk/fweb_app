@@ -31,13 +31,16 @@ def creating_user(user_name: str, pin:str, room_name: str):
     
       # Example usage to create a user in the room
       
-def check_existing_room(room_name: str):
-    """Check if a game room is already created and return True if so."""
+def check_existing_room(room_name: str) -> list:
+    """
+    Check if a game room is already created and return True if so.
+    format: (Bool, Bool)
+    """
     uri = create_uri(room_name)
     engine = create_engine(uri)
     try:
         inspector = inspect(engine)
-        return inspector.has_table("game_room")
+        return (True, inspector.has_table("game_room"))
     except Exception as e:
         msg = (f"Error checking existing room: {e}")
-        return {'trial': False, 'message': msg}
+        return (False, msg)
