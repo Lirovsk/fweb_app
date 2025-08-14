@@ -44,7 +44,7 @@ def create_room():
                 return redirect(url_for('auth.direct_room'))
             except Exception as e:
                 error = f"Error creating game room: {e}"
-        
+        session.clear()
         flash(error)
     
     return render_template('General_registration/create_gameRoom.html')
@@ -79,11 +79,11 @@ def direct_room():
         return redirect(url_for('room.gameRoom'))
     else:
         game = retrieve_engine_data(session['game_name'])
-        if game['trial'] is False:
-            flash(game['message'])
+        if game[0] is False:
+            flash(game[1])
             return redirect(url_for('auth.create_room'))
 
-    return render_template('General_registration/NewPlayer.html', game=game['engine'])
+    return render_template('General_registration/NewPlayer.html', game=game[1])
 
 
 @bp.route('enter-room', methods=['GET', 'POST'])

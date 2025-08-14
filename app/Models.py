@@ -23,6 +23,7 @@ class EngineStorage(Base):
     engine : Mapped[str] = mapped_column(String(50), nullable=False)
     pin : Mapped[str] = mapped_column(String(5), nullable=False)  #change the occourances of this name to game_pin
     last_update : Mapped[Optional[DateTime]] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
+    initial_value : Mapped[int]
     value_for_round : Mapped[int]
     bank_needed : Mapped[bool]
     

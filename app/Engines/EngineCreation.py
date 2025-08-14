@@ -11,10 +11,29 @@ from datetime import datetime, timedelta
 engine_for_storage = create_engine('sqlite:///engine_storage.db')
 #EngineStorage.__table__.create(engine_for_storage)
 # replace this function with a class, the class should contain different classmethods to create diferent types of games.
-def create_engine_data(room_name: str, pin: str, engine_type = "sqlite") -> EngineStorage: #erase this method and replace it
+def create_engine_data(gameType, game_name, game_pin) -> EngineStorage: #erase this method and replace it
     """Create a new engine storage entry."""
+    match gameType:
+        case 'gameType1':
+            constructor = engineConstructor.game_type1
+        case 'gameType2':
+            constructor = engineConstructor.game_type2
+        case 'gameType3':
+            constructor = engineConstructor.game_type3
+        case 'gameType4':
+            constructor = engineConstructor.game_type4
+
+    game_local = constructor(game_name, game_pin)
+    new_engine = EngineStorage(
+        room_name=game_local.game_name,
+        pin=game_local.game_pin,
+        engine=game_local.engine,
+        value_for_round=game_local.value_for_round,
+        bank_needed=game_local.bank_needed,
+        initial_value=game_local.initial_value
+    )
+    
     with Session(engine_for_storage) as session:
-        new_engine = EngineStorage(room_name=room_name, pin=pin, engine=engine_type)
         session.add(new_engine)
         session.commit()
         session.refresh(new_engine)  # Refresh to get the ID and other defaults
@@ -56,43 +75,48 @@ def delete_room(room_name: str) -> None:
         return msg
     
 class engineConstructor:
-    def __init__(self, game_name: str, game_pin: str,last_used: datetime,
-                value_for_round: float, bank_needed: bool, engine = "sqlite"):
+    def __init__(self, game_name: str, game_pin: str,
+                value_for_round: float, bank_needed: bool, initial_value: int, engine = "sqlite"):
         self.game_name = game_name
         self.game_pin = game_pin
-        self.last_used = last_used
         self.value_for_round = value_for_round
-        self.bank_neede = bank_needed
+        self.bank_needed = bank_needed
+        self.initial_value = initial_value
         self.engine = engine
+        #last_used does not need to be stored
 
 
     @classmethod
-    def game_type1(cls, game_name_, game_pin_,):
+    def game_type1(cls, game_name_: str, game_pin_: str):
         time = datetime.now()
-        value = 300
-        return engineConstructor(game_name = game_name_, game_pin = game_pin_, last_used = time, 
-                                value_for_round = value, bank_needed= False)
+        value_for_round_ = 300
+        initial_value_ = 1000
+        return engineConstructor(game_name=game_name_, game_pin=game_pin_,
+                                value_for_round=value_for_round_, bank_needed=False, initial_value=initial_value_)
 
 
     @classmethod
-    def game_type2(cls, game_name_, game_pin_,):
+    def game_type2(cls, game_name_: str, game_pin_: str):
         time = datetime.now()
-        value = 300
-        return engineConstructor(game_name = game_name_, game_pin = game_pin_, last_used = time, 
-                                value_for_round = value, bank_needed= True)   
+        value_for_round_ = 300
+        initial_value_ = 1500
+        return engineConstructor(game_name=game_name_, game_pin=game_pin_,
+                                value_for_round=value_for_round_, bank_needed=True, initial_value=initial_value_)
 
 
     @classmethod
-    def game_type3(cls, game_name_, game_pin_,):
+    def game_type3(cls, game_name_: str, game_pin_: str):
         time = datetime.now()
-        value = 600
-        return engineConstructor(game_name = game_name_, game_pin = game_pin_, last_used = time, 
-                                value_for_round = value, bank_needed= False) 
-    
+        value_for_round_ = 600
+        initial_value_ = 2000
+        return engineConstructor(game_name=game_name_, game_pin=game_pin_,
+                                value_for_round=value_for_round_, bank_needed=False, initial_value=initial_value_)
+
 
     @classmethod
-    def game_type4(cls, game_name_, game_pin_,):
+    def game_type4(cls, game_name_: str, game_pin_: str):
         time = datetime.now()
-        value = 600
-        return engineConstructor(game_name = game_name_, game_pin = game_pin_, last_used = time, 
-                                value_for_round = value, bank_needed= True)
+        value_for_round_ = 600
+        initial_value_ = 2500
+        return engineConstructor(game_name=game_name_, game_pin=game_pin_,
+                                value_for_round=value_for_round_, bank_needed=True, initial_value=initial_value_)
