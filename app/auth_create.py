@@ -14,6 +14,11 @@ from .Engines import GeneralServices as services
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+@bp.route('/setting-room/<gameType>')
+def setting_room(gameType):
+    session['game_type'] = gameType
+    return redirect(url_for('auth.create_room'))
+
 @bp.route('create-room', methods=('GET', 'POST'))
 def create_room():
     if request.method == 'POST':
@@ -23,7 +28,7 @@ def create_room():
         
         session['game_name'] = game_name
         session['game_pin'] = game_pin
-        
+        game_type = session.get('game_type')
         if not game_name:
             error = 'Game name is required.'
         elif not game_pin:
@@ -33,7 +38,7 @@ def create_room():
         
         if error is None:
             try:
-                create_engine_data(game_name, game_pin)
+                create_engine_data(game_type, game_name, game_pin)
                 create_game_room(game_name)
                 session['game_created'] = True
                 return redirect(url_for('auth.direct_room'))
@@ -44,7 +49,7 @@ def create_room():
     
     return render_template('General_registration/create_gameRoom.html')
 
-@bp.route('direct-room', methods=['GET', 'POST'])
+@bp.route('/direct-room', methods=['GET', 'POST'])
 def direct_room():
     if request.method == 'POST':
         game_name = session['game_name']
