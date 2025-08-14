@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 engine_for_storage = create_engine('sqlite:///engine_storage.db')
 #EngineStorage.__table__.create(engine_for_storage)
 # replace this function with a class, the class should contain different classmethods to create diferent types of games.
-def create_engine_data(room_name: str, pin: str, engine_type = "sqlite") -> EngineStorage:
+def create_engine_data(room_name: str, pin: str, engine_type = "sqlite") -> EngineStorage: #erase this method and replace it
     """Create a new engine storage entry."""
     with Session(engine_for_storage) as session:
         new_engine = EngineStorage(room_name=room_name, pin=pin, engine=engine_type)

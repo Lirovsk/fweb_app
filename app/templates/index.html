@@ -3,8 +3,12 @@
 
 {% block content %}
    <h1 class="content_title">Select what to do:</h1>
+   <script src="{{ url_for('static', filename='js/actions.js') }}"></script>
     <ul class="link_list">
-         <li><a href="{{url_for('auth.create_room')}}">Create a game Room</a></li>
-          <li><a href="{{url_for('auth.enterRoom')}}">Enter on a game Room</a></li>
+        <li><button type="button" onclick="showOptions()">Show Game Options</button>
+        <div id="game-options"></div>
+        </li>
+        
+        <li><a href="{{url_for('auth.enterRoom')}}">Enter on a game Room</a></li>
     </ul>
 {% endblock %}
