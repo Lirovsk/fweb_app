@@ -7,7 +7,7 @@ from flask import (Blueprint,
     session,
     url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
-from .Engines.GeneralServices import retrieving_players
+from .Engines.GeneralServices import retrieving_players, retrieving_one_player
 from .bankServices import payment as payment_service
 
 bp = Blueprint('room', __name__, url_prefix='/room')
@@ -29,6 +29,8 @@ def room_required(view):
 def gameRoom():
     error = None
     players = retrieving_players(session['game_name'])
+    player_game = retrieving_one_player(session['game_name'], session['user_name'])
+    session['user_balance'] = player_game.balance
     if players['trial'] == False:
         error = players['message']
         flash(error)
